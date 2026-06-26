@@ -8,7 +8,6 @@ on:
 
 env:
   TF_VERSION: "1.6.0"
-  AWS_REGION: "us-east-1"
 
 jobs:
   terraform-validate:
@@ -33,9 +32,13 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+        env:
+          AWS_ACCESS_KEY_ID: "mock-key"
+          AWS_SECRET_ACCESS_KEY: "mock-secret"
+          AWS_DEFAULT_REGION: "us-east-1"
 
       - name: Print success message
         run: |
           echo "✅ Terraform code is valid!"
-          echo "✅ All resources are correctly defined"
+          echo "✅ All resources correctly defined"
           echo "✅ Ready to deploy to AWS when credentials are provided"
